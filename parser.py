@@ -41,6 +41,11 @@ def parser(count_img, typename, index=None):
                 out.write(img.content)
                 out.close()
 
+                name_file = str("D:/test/" + typename + "/" + file_name.zfill(4) + ".jpg")
+                image = cv2.imread(name_file)
+                file_write = str("D:/dataset/" + typename + "/" + file_name.zfill(4) + ".jpg")
+                cv2.imwrite(file_write, image)
+
                 time.sleep(1)
                 count += 1
                 if (count == count_img):
@@ -49,5 +54,13 @@ def parser(count_img, typename, index=None):
 
 if __name__ == "__main__":
     c = 1100
+    print("Парсинг тигров")
     parser(c, "tiger")
+
+    print("Пауза")
+    time.sleep(60)
+
+    print("Парсинг леопардов")
     parser(c, "leopard")
+
+    shutil.rmtree("D:/test/")
