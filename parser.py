@@ -5,7 +5,7 @@ import cv2
 import requests
 from bs4 import BeautifulSoup
 
-def parser(typename):
+def parser(count_img, typename, index=None):
     if not os.path.exists("D:/dataset/"):
         os.mkdir("D:/dataset/")
     if not os.path.exists("D:/dataset/" + typename):
@@ -27,6 +27,27 @@ def parser(typename):
         for link in soup.find_all("img", class_="justifier__thumb"):
             src_list.append(link.get("src"))
 
+        for img_url in src_list:
+            if img_url.find("n=13") != -1:
+                src = "https:" + img_url
+                img = requests.get(src)
+
+                if index != None:
+                    file_name = str(index[count])
+                else:
+                    file_name = str(count)
+
+                out = open("D:/test/" + typename + "/" + file_name.zfill(4) + ".jpg", "wb")
+                out.write(img.content)
+                out.close()
+
+                time.sleep(1)
+                count += 1
+                if (count == count_img):
+                    return page
+
+
 if __name__ == "__main__":
-    parser("tiger")
-    parser("leopard")
+    c = 1100
+    parser(c, "tiger")
+    parser(c, "leopard")
