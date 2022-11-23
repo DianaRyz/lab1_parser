@@ -32,7 +32,7 @@ def parser(count_img, typename, index=None):
                 src = "https:" + img_url
                 img = requests.get(src)
 
-                if index != None:
+                if index is not None:
                     file_name = str(index[count])
                 else:
                     file_name = str(count)
@@ -48,7 +48,7 @@ def parser(count_img, typename, index=None):
 
                 time.sleep(1)
                 count += 1
-                if (count == count_img):
+                if count == count_img:
                     return page
 
 
