@@ -1,6 +1,7 @@
 import csv
 import os
 
+
 class Iterator:
     def __init__(self, class_name: str, path: str) -> None:
         """
@@ -42,5 +43,9 @@ class Iterator:
 
 if __name__ == "__main__":
     iterator = Iterator("leopard", "dataset.csv")
+    for i in iterator:
+        print(i)
+
+    iterator = Iterator("tiger", "dataset.csv")
     for i in iterator:
         print(i)

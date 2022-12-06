@@ -3,6 +3,7 @@ import csv
 import random
 import shutil
 
+
 def write_copy(item: int, class_name: str, random_path: str, csv_path: str = "copy_random.csv") -> None:
     """
     Record annotation copy element
@@ -80,6 +81,7 @@ def copy_to_random(path_to_dataset: str, path_to_random: str, csv_path: str = "c
         if os.path.isfile(path):
             shutil.copyfile(path, new_path)
             write_copy(random_num2[i], class_name, new_path, csv_path)
+
 
 if __name__ == "__main__":
     path_dataset = "D:/dataset"

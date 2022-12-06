@@ -1,9 +1,7 @@
-#import random
 import csv
 
 
 def next_element(class_name: str, count: int, csv_path: str = "copy_dataset.csv") -> str or None:
-
     """
     The function returns the path of the element following count if there is no element
     returns None
@@ -25,9 +23,6 @@ def next_element(class_name: str, count: int, csv_path: str = "copy_dataset.csv"
 
 
 if __name__ == "__main__":
-
-    #random_list = list()
-    #random.shuffle(random_list)
     for i in range(0, 1100):
         item = next_element("tiger", i)
         print(item)

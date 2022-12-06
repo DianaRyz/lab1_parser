@@ -1,7 +1,8 @@
 import csv
 import os
 
-def write_element(i: int, class_name: str, dataset_path: str, csv_path: str = "") -> None:
+
+def write_element(i: int, class_name: str, dataset_path: str, path_csv: str = "") -> None:
 
     """
     Record i-th element
@@ -12,7 +13,7 @@ def write_element(i: int, class_name: str, dataset_path: str, csv_path: str = ""
     """
 
     headings = ["Absolute way", "Relative way", "Class"]
-    with open(csv_path, "a", newline="", encoding="utf-8") as file:
+    with open(path_csv, "a", newline="", encoding="utf-8") as file:
         write_in_file = csv.DictWriter(
             file, fieldnames=headings, delimiter=";", quoting=csv.QUOTE_ALL
         )
@@ -26,14 +27,15 @@ def write_element(i: int, class_name: str, dataset_path: str, csv_path: str = ""
                 }
             )
 
-def annotation(dataset_path: str, csv_path: str) -> str or None:
+
+def annotation(dataset_path: str, path_csv: str) -> str or None:
     """
     Writing an annotation of a dataset to a file
         dataset_path(str) - path to the directory
         csv_path(str) - path to the csv-file
     """
     headings = ["Absolute way", "Relative way", "Class"]
-    with open(csv_path, "w", newline="", encoding="utf-8") as file:
+    with open(path_csv, "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(
             file, fieldnames=headings, delimiter=";", quoting=csv.QUOTE_ALL
         )
@@ -50,7 +52,7 @@ def annotation(dataset_path: str, csv_path: str) -> str or None:
     )
 
     for i in range(0, count_files):
-        write_element(i, class_name, dataset_path, csv_path)
+        write_element(i, class_name, dataset_path, path_csv)
 
     class_name = "leopard"
     path_class = dataset_path + "/" + class_name
@@ -63,7 +65,8 @@ def annotation(dataset_path: str, csv_path: str) -> str or None:
     )
 
     for i in range(0, count_files):
-        write_element(i, class_name, dataset_path, csv_path)
+        write_element(i, class_name, dataset_path, path_csv)
+
 
 if __name__ == "__main__":
     path_dataset = "D:/dataset"

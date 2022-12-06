@@ -26,7 +26,7 @@ def write_copy(item: int, class_name: str, copy_path: str, csv_path: str = "copy
         )
 
 
-def copy_to_another(path_to_copy: str, path_to_dataset: str, csv_path: str = "copy_dataset.csv") -> str or None:
+def copy_to_another(name: str, path_to_copy: str, path_dataset: str, csv_path: str = "copy_dataset.csv") -> str or None:
 
     """
     Copies data
@@ -43,8 +43,7 @@ def copy_to_another(path_to_copy: str, path_to_dataset: str, csv_path: str = "co
         )
         writer.writeheader()
 
-    class_name = "tiger"
-    path_class = path_to_dataset + "/" + class_name
+    path_class = path_dataset + "/" + name
     count_files = len(
         [
             element
@@ -55,30 +54,14 @@ def copy_to_another(path_to_copy: str, path_to_dataset: str, csv_path: str = "co
 
     for i in range(0, count_files):
         path = path_class + f"/{str(i).zfill(4)}.jpg"
-        new_path = path_class + f"/{class_name}_{str(i).zfill(4)}.jpg"
+        new_path = path_to_copy + f"/{name}_{str(i).zfill(4)}.jpg"
         if os.path.isfile(path):
             shutil.copyfile(path, new_path)
-            write_copy(i, class_name, new_path, csv_path)
-
-    class_name = "leopard"
-    path_class = path_to_dataset + "/" + class_name
-    count_files = len(
-        [
-            element
-            for element in os.listdir(path_class)
-            if os.path.isfile(os.path.join(path_class, element))
-        ]
-    )
-
-    for i in range(0, count_files):
-        path = path_class + f"/{str(i).zfill(4)}.jpg"
-        new_path = path_to_copy + f"/{class_name}_{str(i).zfill(4)}.jpg"
-        if os.path.isfile(path):
-            shutil.copyfile(path, new_path)
-            write_copy(i, class_name, new_path, csv_path)
+            write_copy(i, name, new_path, csv_path)
 
 
 if __name__ == "__main__":
     path_to_dataset = "D:/dataset"
     path_to_another_dataset = "D:/dataset/copy_dataset"
-    copy_to_another(path_to_another_dataset, path_to_dataset)
+    copy_to_another("tiger", path_to_another_dataset, path_to_dataset)
+    copy_to_another("leopard", path_to_another_dataset, path_to_dataset)
